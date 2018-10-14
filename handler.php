@@ -1,6 +1,6 @@
 <?php
 
-$db = new mysqli("localhost", "host1521834", "1c379a6f", "host1521834_ekapie");
+$db = new mysqli("localhost", "host###", "###", "host###_ekapie");
 
 
 if ($_POST['query'] === "c") {
@@ -20,7 +20,7 @@ function get_call() {
 
     if (preg_match("/^[0-9]{7,14}$/", $number)) {
         $date = time();
-        $db->query("INSERT INTO `host1521834_ekapie`.`calls` (`id`, `phone`, `date`) VALUES (NULL, '$number', '$date')");
+        $db->query("INSERT INTO `host###_ekapie`.`calls` (`id`, `phone`, `date`) VALUES (NULL, '$number', '$date')");
         calls_mail();
         print "Ваша заявка принята!";
     } else {
@@ -45,7 +45,7 @@ function get_form() {
     if ($error === "") {
         $date = time();
 
-        $q = $db->query("INSERT INTO `host1521834_ekapie`.`forms` (`id`, `name`, `phone`, `comments`, `date`) VALUES ('', '$name', '$number', '$text', '$date')");
+        $q = $db->query("INSERT INTO `host###_ekapie`.`forms` (`id`, `name`, `phone`, `comments`, `date`) VALUES ('', '$name', '$number', '$text', '$date')");
         forms_mail();
         print "Ваше сообщение отправлено!";
     } else {
@@ -74,7 +74,7 @@ function input_phone($number) {
 }
 
 function calls_mail() {
-    $to = 'krasnuha@list.ru';
+    $to = '###@list.ru';
     $subject = 'Заявка ekapie.ru';
     $message = 'Вам пришла заявка! http://www.ekapie.ru/host.php';
     $headers = 'From: admin@ekapie.ru' . "\r\n" .
@@ -85,7 +85,7 @@ function calls_mail() {
 }
 
 function forms_mail() {
-    $to = 'krasnuha@list.ru';
+    $to = '###@list.ru';
     $subject = 'Сообщение ekapie.ru';
     $message = 'Вам пришло сообщение! http://www.ekapie.ru/host.php';
     $headers = 'From: admin@ekapie.ru' . "\r\n" .
@@ -156,7 +156,7 @@ function calls($start) {
         $start = 0;
     }
 
-    $sql = $db->query("SELECT id, phone, date FROM `host1521834_ekapie`.`calls` ORDER BY `id` DESC  LIMIT $start, $limit ");
+    $sql = $db->query("SELECT id, phone, date FROM `host###_ekapie`.`calls` ORDER BY `id` DESC  LIMIT $start, $limit ");
 
     print "<h2>Заявки</h2>
         <table class=\"table table-striped\">
@@ -179,7 +179,7 @@ function calls($start) {
     print "</tbody>
   </table>";
 
-    $sql_1 = "SELECT COUNT(*) FROM `host1521834_ekapie`.`calls`";
+    $sql_1 = "SELECT COUNT(*) FROM `host###_ekapie`.`calls`";
     $stmt = $db->query($sql_1);
     $row = mysqli_fetch_row($stmt);
     $allItems = $row[0];
@@ -213,7 +213,7 @@ function forms($start) {
         $start = 0;
     }
 
-    $sql = $db->query("SELECT id, name, phone, comments, date FROM `host1521834_ekapie`.`forms` ORDER BY `id` DESC  LIMIT $start, $limit ");
+    $sql = $db->query("SELECT id, name, phone, comments, date FROM `host###_ekapie`.`forms` ORDER BY `id` DESC  LIMIT $start, $limit ");
 
     print "<h2>Сообщения</h2>
             <table class=\"table table-striped\">
@@ -240,7 +240,7 @@ function forms($start) {
     print "</tbody>
   </table>";
 
-    $sql_1 = "SELECT COUNT(*) FROM `host1521834_ekapie`.`forms`";
+    $sql_1 = "SELECT COUNT(*) FROM `host###_ekapie`.`forms`";
     $stmt = $db->query($sql_1);
     $row = mysqli_fetch_row($stmt);
     $allItems = $row[0];
